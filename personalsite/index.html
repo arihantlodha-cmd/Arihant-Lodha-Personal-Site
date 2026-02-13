@@ -1,680 +1,504 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arihant Lodha — AriOS v1.0</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Tailwind CDN for utility classes on select components -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Inter", "system-ui", "sans-serif"],
-              mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
-            },
-            colors: {
-              slatebg: "#020617",
-            },
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Arihant Lodha - Quantitative Finance Researcher & IB Diploma Student in Tokyo. Building trading models and studying investor psychology." />
+  <meta name="keywords"
+    content="quantitative finance, machine learning, algorithmic trading, behavioral economics, Tokyo, high school researcher" />
+  <meta property="og:title" content="Arihant Lodha — Quant Finance & ML" />
+  <meta property="og:description"
+    content="Quantitative Finance & Behavioral Economics Researcher. Building trading models on Japanese Equity Markets." />
+  <meta property="og:type" content="website" />
+  <title>Arihant Lodha — Quant Finance & ML</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+          colors: {
+            bg: "#050505",
+            card: "rgba(255, 255, 255, 0.03)",
+            border: "rgba(255, 255, 255, 0.08)",
+            primary: "#3b82f6",
+          },
+          backgroundImage: {
+            "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
           },
         },
-        corePlugins: {
-          preflight: true,
-        },
-      };
-    </script>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!-- Boot Screen -->
-    <div id="boot-screen">
-      <div class="boot-terminal">
-        <div class="boot-logo">AL</div>
-        <div class="boot-title">AriOS v1.0</div>
-        <div class="boot-line">Loading system<span class="boot-dots">...</span></div>
-        <div class="boot-sub">Personal workspace environment initializing</div>
+      },
+    };
+  </script>
+  <style>
+    body {
+      background-color: #050505;
+      color: #e5e5e5;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .glass-card {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.15);
+    }
+
+    .text-gradient {
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-blue-500/30">
+  <canvas id="particles-canvas"></canvas>
+
+  <nav class="fixed top-0 w-full z-50 glass border-b-0 border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="text-lg font-bold tracking-tight">AL</a>
+      <div class="hidden md:flex gap-6 text-xs text-gray-400 font-medium uppercase tracking-wide">
+        <a href="#about" class="hover:text-white transition-colors">About</a>
+        <a href="#experience" class="hover:text-white transition-colors">Exp</a>
+        <a href="#education" class="hover:text-white transition-colors">Edu</a>
+        <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+        <a href="#research" class="hover:text-white transition-colors">Research</a>
+        <a href="#writing" class="hover:text-white transition-colors">Writing</a>
+        <a href="resume.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">Resume</a>
       </div>
     </div>
+  </nav>
 
-    <!-- Desktop Environment -->
-    <div id="desktop" class="desktop hidden">
-      <!-- Background effects -->
-      <div class="desktop-grid"></div>
-      <div class="desktop-stars"></div>
-
-      <!-- Taskbar -->
-      <div class="taskbar">
-        <button class="start-button">
-          <span class="start-logo">AL</span>
-          <span class="start-text">Start</span>
-        </button>
-        <div class="taskbar-windows" id="taskbar-windows"></div>
-        <div class="taskbar-system">
-          <span class="taskbar-icon">🔊</span>
-          <span class="taskbar-icon">📶</span>
-          <span class="taskbar-clock" id="taskbar-clock">00:00</span>
+  <main class="max-w-6xl mx-auto px-6 pt-32 pb-20">
+    <!-- HERO -->
+    <section class="min-h-[70vh] flex flex-col justify-center mb-24">
+      <div class="space-y-6">
+        <div
+          class="inline-flex items-center px-3 py-1 rounded-full glass border border-blue-500/20 text-xs text-blue-400 font-medium">
+          <span class="w-2 h-2 rounded-full bg-blue-500 mr-2 animate-pulse"></span>
+          Based in Tokyo
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
+          ARIHANT <br />
+          <span class="text-gradient">LODHA</span>
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl leading-relaxed">
+          Quantitative Finance & Behavioral Economics Researcher @ UMB. <br>
+          Building and backtesting trading models on Japanese Equity Markets.
+        </p>
+        <div class="flex gap-4 pt-4">
+          <a href="#research"
+            class="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+            View Research
+          </a>
+          <a href="resume.pdf" target="_blank" class="px-6 py-3 glass rounded-lg hover:bg-white/10 transition-colors">
+            Resume
+          </a>
         </div>
       </div>
+    </section>
 
-      <!-- Desktop Icons -->
-      <div class="desktop-icons">
-        <button class="desktop-icon" data-window="about">
-          <div class="desktop-icon-image desktop-icon-about">
-            <span class="desktop-icon-symbol">ME</span>
+    <!-- ABOUT & STATS -->
+    <section id="about" class="mb-32 scroll-mt-24">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div class="space-y-6">
+          <h2 class="text-3xl font-bold">About Me</h2>
+          <div class="prose prose-invert text-gray-400 leading-relaxed space-y-4">
+            <p>
+              I am an IB Diploma student at <strong>St. Mary's International School</strong> in Tokyo, conducting
+              behavioral finance research as a Research Fellow at <strong>Universitas Mercu Buana</strong>. My work
+              focuses on investor psychology, market structure, and systematic trading strategies.
+            </p>
+            <p>
+              As a first-generation student bridging India and Tokyo, I combine academic research with practical
+              application. I build Python-based tools to analyze Japanese equity markets, designing strategies based on
+              momentum, moving averages, and technical indicators.
+            </p>
+            <p>
+              Previously, I interned at <strong>Rove</strong> (YC W24), a fintech startup, where I contributed to
+              backend systems and analyzed incentive mechanics in consumer payments.
+            </p>
           </div>
-          <span class="desktop-icon-label">About Me</span>
-        </button>
-        <button class="desktop-icon" data-window="projects">
-          <div class="desktop-icon-image desktop-icon-projects">
-            <span class="desktop-icon-symbol">PRJ</span>
+
+          <div class="p-6 glass rounded-xl border-l-4 border-blue-500">
+            <h3 class="text-white font-semibold mb-2">The Tokyo Angle</h3>
+            <p class="text-sm text-gray-400">
+              Living in Tokyo offers a unique vantage point on technology and finance. The blend of tradition and
+              hyper-modernity influences my approach to problem-solving—respecting fundamentals while pushing
+              boundaries.
+            </p>
           </div>
-          <span class="desktop-icon-label">Projects</span>
-        </button>
-        <button class="desktop-icon" data-window="skills">
-          <div class="desktop-icon-image desktop-icon-skills">
-            <span class="desktop-icon-symbol">&lt;/&gt;</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-40">
+            <span class="text-4xl font-bold text-blue-400">95%</span>
+            <span class="text-sm text-gray-400">ML Model Accuracy<br>(TSE Equities)</span>
           </div>
-          <span class="desktop-icon-label">Skills</span>
-        </button>
-        <button class="desktop-icon" data-window="experience">
-          <div class="desktop-icon-image desktop-icon-experience">
-            <span class="desktop-icon-symbol">XP</span>
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-40">
+            <span class="text-4xl font-bold text-blue-400">3rd</span>
+            <span class="text-sm text-gray-400">Japan V5RC<br>Nationals</span>
           </div>
-          <span class="desktop-icon-label">Experience</span>
-        </button>
-        <button class="desktop-icon" data-window="research">
-          <div class="desktop-icon-image desktop-icon-research">
-            <span class="desktop-icon-symbol">RCH</span>
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-40">
+            <span class="text-4xl font-bold text-blue-400">200+</span>
+            <span class="text-sm text-gray-400">GitHub Users</span>
           </div>
-          <span class="desktop-icon-label">Research</span>
-        </button>
-        <button class="desktop-icon" data-window="media">
-          <div class="desktop-icon-image desktop-icon-media">
-            <span class="desktop-icon-symbol">►</span>
+          <div class="glass-card p-6 rounded-2xl flex flex-col justify-between h-40">
+            <span class="text-4xl font-bold text-blue-400">IB</span>
+            <span class="text-sm text-gray-400">Diploma Student<br>Class of '28</span>
           </div>
-          <span class="desktop-icon-label">Media</span>
-        </button>
-        <button class="desktop-icon" data-window="resume">
-          <div class="desktop-icon-image desktop-icon-resume">
-            <span class="desktop-icon-symbol">CV</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="mb-32 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-8">Experience</h2>
+      <div class="relative border-l border-white/10 ml-3 space-y-12">
+
+        <!-- Role 1 -->
+        <div class="ml-8 relative">
+          <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-blue-500 ring-4 ring-black"></span>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">Research Fellow</h3>
+                <p class="text-blue-400 font-medium">Universitas Mercu Buana · Apprenticeship</p>
+              </div>
+              <span class="text-sm text-gray-500 mt-1 md:mt-0">Feb 2026 – Present</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Conducting research on behavioral finance, studying how investor psychology and heuristics shape trading
+              behavior. Contributing to literature review, experimental design, and data analysis for academic
+              publication.
+            </p>
           </div>
-          <span class="desktop-icon-label">Resume</span>
-        </button>
-        <button class="desktop-icon" data-window="contact">
-          <div class="desktop-icon-image desktop-icon-contact">
-            <span class="desktop-icon-symbol">@</span>
+        </div>
+
+        <!-- Role 2 -->
+        <div class="ml-8 relative">
+          <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-gray-700 ring-4 ring-black"></span>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">Technical Intern</h3>
+                <p class="text-blue-400 font-medium">Rove (YC W24)</p>
+              </div>
+              <span class="text-sm text-gray-500 mt-1 md:mt-0">Jul 2025 – Aug 2025</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Contributed to backend product systems and analyzed incentive mechanics in consumer payments for a
+              YC-backed fintech startup. Gained hands-on experience in shipping features and improving reliability in a
+              fast-paced environment.
+            </p>
           </div>
-          <span class="desktop-icon-label">Contact</span>
-        </button>
-        <button class="desktop-icon" data-window="github">
-          <div class="desktop-icon-image desktop-icon-github">
-            <span class="desktop-icon-symbol">GH</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="mb-32 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-8">Education</h2>
+      <div class="relative border-l border-white/10 ml-3 space-y-12">
+
+        <!-- Education 1 -->
+        <div class="ml-8 relative">
+          <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-gray-700 ring-4 ring-black"></span>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">Harvard John A. Paulson School of Engineering</h3>
+                <p class="text-blue-400 font-medium">Ventures-TECH Summer Program</p>
+              </div>
+              <span class="text-sm text-gray-500 mt-1 md:mt-0">Jul 2025 – Aug 2025</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Selected (15% acceptance rate) for a startup-focused program. Worked closely with founders on projects at
+              the intersection of entrepreneurship and technology.
+            </p>
           </div>
-          <span class="desktop-icon-label">GitHub</span>
-        </button>
+        </div>
+
+        <!-- Education 2 -->
+        <div class="ml-8 relative">
+          <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-gray-700 ring-4 ring-black"></span>
+          <div class="glass-card p-6 rounded-2xl">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">St. Mary's International School</h3>
+                <p class="text-blue-400 font-medium">IB Diploma Programme</p>
+              </div>
+              <span class="text-sm text-gray-500 mt-1 md:mt-0">2016 – 2028</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              GPA: 3.96/4.00. <br>
+              <strong>Activities:</strong> Finance Club (Member, 60+ members), VEX Robotics (Point Person). <br>
+              <strong>Relevant Coursework:</strong> Math AA HL, Physics HL, Economics HL.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research" class="mb-32 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-8">Research</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Paper 1 -->
+        <a href="ubi-inequality-essay.pdf" target="_blank"
+          class="glass-card p-8 rounded-2xl group cursor-pointer block">
+          <div class="flex items-start justify-between mb-4">
+            <div class="bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+              Economics</div>
+            <span class="text-gray-500 text-sm">PDF Available</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Inequality & UBI
+            Essay</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            A comprehensive research paper analyzing policy tradeoffs, distributional impacts, and the economic
+            viability of Universal Basic Income in modern economies.
+          </p>
+          <div class="text-white text-sm font-medium flex items-center gap-2">
+            Read Paper <span class="group-hover:translate-x-1 transition-transform">-></span>
+          </div>
+        </a>
+
+        <!-- Paper 2 -->
+        <div class="glass-card p-8 rounded-2xl border-dashed border-gray-700">
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3 py-1 rounded uppercase tracking-wider">
+              Behavioral Finance</div>
+            <span class="text-gray-500 text-sm">Coming Soon</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Behavioral Finance Research</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Upcoming publication on investor heuristics and market anomalies in the Japanese equity market.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="mb-32 scroll-mt-24">
+      <div class="flex items-center justify-between mb-12">
+        <h2 class="text-3xl font-bold">Selected Projects</h2>
+        <a href="https://github.com/arihantlodha-cmd" target="_blank"
+          class="text-sm text-blue-400 hover:text-blue-300">View GitHub -></a>
       </div>
 
-      <!-- Window Templates -->
-      <template id="window-template">
-        <div class="window">
-          <div class="window-header">
-            <div class="window-title">
-              <span class="window-title-icon"></span>
-              <span class="window-title-text"></span>
-            </div>
-            <div class="window-controls">
-              <button class="window-btn window-minimize" aria-label="Minimize"></button>
-              <button class="window-btn window-maximize" aria-label="Maximize"></button>
-              <button class="window-btn window-close" aria-label="Close"></button>
-            </div>
-          </div>
-          <div class="window-content"></div>
-          <div class="window-resize-handle"></div>
-        </div>
-      </template>
-
-      <!-- Content templates -->
-      <template id="about-content">
-        <section class="window-section about-section">
-          <div class="about-main">
-            <div class="about-avatar">
-              <div class="avatar-circle">AL</div>
-            </div>
-            <div class="about-text">
-              <div class="about-header">
-                <h2>Arihant Lodha</h2>
-                <span
-                  class="verified-badge"
-                  aria-label="Verified profile"
-                  title="Verified profile"
-                  >✔︎ Verified</span
-                >
-              </div>
-              <p class="about-pronouns">He/Him</p>
-              <p class="about-tagline">
-                Financial Research @ UMB | Building Algorithmic Trading Systems | IBDP ’28
-                | ROVE (YC W24) | Ranked 3rd Nationally At Robotics | Tokyo, Japan
-              </p>
-              <p>
-                High school researcher working at the intersection of quantitative finance
-                and behavioral economics. I currently conduct behavioral finance research
-                as a Research Fellow at Universitas Mercu Buana and independently build
-                Python-based algorithmic trading systems for Japanese equity markets.
-              </p>
-              <p>
-                Previously, I contributed to backend development and product execution at
-                YC-backed fintech startup Rove, and my economic writing on inequality and
-                UBI has been recognized by the Harvard Undergraduate Economics
-                Association. I’m especially interested in market structure, financial
-                technology, and collaborating with researchers and early-stage founders.
-              </p>
-            </div>
-          </div>
-          <div class="about-meta">
-            <div class="about-card">
-              <h3>Education</h3>
-              <p>
-                <strong>St. Mary&apos;s International School</strong> — International
-                Baccalaureate Diploma Programme (IBDP ’28)
-              </p>
-              <p>
-                GPA 3.96/4.00. Math AA HL, Physics HL, Economics HL. Finance Club &amp;
-                Robotics Club.
-              </p>
-            </div>
-            <div class="about-card">
-              <h3>Current Role</h3>
-              <p><strong>Research Fellow, Universitas Mercu Buana</strong></p>
-              <p>
-                Conducting behavioral finance research while building algorithmic trading
-                systems for Japanese equity markets.
-              </p>
-            </div>
-            <div class="about-card">
-              <h3>Initiatives</h3>
-              <p><strong>Founder, Quantitative Finance Club</strong></p>
-              <p>
-                Started a quantitative finance club to teach younger students financial
-                modeling, portfolio basics, and how markets work through hands-on
-                projects.
-              </p>
-            </div>
-          </div>
-        </section>
-      </template>
-
-      <template id="projects-content">
-        <section class="window-section">
-          <h2>Projects</h2>
-          <p class="section-intro">A few things you’ve been building recently.</p>
-          <div class="grid grid-projects">
-            <article class="card-project">
-              <div class="card-header">
-                <h3>ML Stock Price Prediction (JP Equities)</h3>
-                <span class="card-tag">Machine Learning · Finance</span>
-              </div>
-              <p>
-                Built a machine learning model to predict next-day stock prices for
-                Japanese equities with 95% R² accuracy. Uses 15+ technical indicators
-                (moving averages, momentum, volatility) and achieved a mean absolute
-                error of ¥47 on Toyota Motor Corporation (TSE: 7203).
-              </p>
-              <div class="card-actions">
-                <a
-                  href="https://github.com/arihantlodha-cmd/ML-Stock-Price-Prediction"
-                  target="_blank"
-                  class="btn btn-primary"
-                  >View on GitHub</a
-                >
-              </div>
-            </article>
-
-            <article class="card-project">
-              <div class="card-header">
-                <h3>Algorithmic Trading Strategy Backtester</h3>
-                <span class="card-tag">Quantitative Finance</span>
-              </div>
-              <p>
-                Python-based backtesting system for moving average crossover strategies
-                on Tokyo Stock Exchange securities. Implements data pipelines with
-                yfinance, computes technical indicators, and visualizes trading signals
-                across major Japanese equities.
-              </p>
-              <div class="card-actions">
-                <a
-                  href="https://github.com/arihantlodha-cmd/Japanese-Stock-Moving-Average-Strategy"
-                  target="_blank"
-                  class="btn btn-primary"
-                  >View on GitHub</a
-                >
-              </div>
-            </article>
-
-            <article class="card-project">
-              <div class="card-header">
-                <h3>Robotics — Japan V5RC Nationals</h3>
-                <span class="card-tag">Robotics · Engineering</span>
-              </div>
-              <p>
-                Led robot design, programming, and match strategy for the SMIS VEX
-                Robotics team, placing 3rd nationally at the Japan V5RC HS National
-                Regional Championship. Focused on reliable autonomous routines and
-                competition-ready mechanical design.
-              </p>
-              <div class="card-actions">
-                <span class="btn btn-ghost" aria-disabled="true">Details coming soon</span>
-              </div>
-            </article>
-          </div>
-        </section>
-      </template>
-
-      <template id="skills-content">
-        <section class="window-section">
-          <h2>Skills</h2>
-          <p class="section-intro">
-            Organize your skills by category. Everything here is placeholder.
-          </p>
-          <div class="grid grid-skills">
-            <div class="card">
-              <h3>Languages</h3>
-              <div class="skill-tags">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">SQL</span>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Libraries &amp; Frameworks</h3>
-              <div class="skill-tags">
-                <span class="skill-tag">pandas</span>
-                <span class="skill-tag">NumPy</span>
-                <span class="skill-tag">scikit-learn</span>
-                <span class="skill-tag">Matplotlib</span>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Tools & Platforms</h3>
-              <div class="skill-tags">
-                <span class="skill-tag">Git &amp; GitHub</span>
-                <span class="skill-tag">Jupyter Notebook</span>
-                <span class="skill-tag">yfinance</span>
-                <span class="skill-tag">Excel / Google Sheets</span>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Other</h3>
-              <div class="skill-tags">
-                <span class="skill-tag">Quantitative Finance</span>
-                <span class="skill-tag">Algorithmic Trading</span>
-                <span class="skill-tag">Behavioral Economics</span>
-                <span class="skill-tag">Research Writing</span>
-                <span class="skill-tag">Robotics &amp; Control</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </template>
-
-      <template id="experience-content">
-        <section class="window-section">
-          <h2>Experience</h2>
-          <p class="section-intro">
-            A timeline of roles, internships, and research positions.
-          </p>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <h3>Research Fellow — Universitas Mercu Buana</h3>
-                  <span class="timeline-date">Feb 2026 – Present · Remote</span>
-                </div>
-                <p>
-                  Working on a behavioral finance research paper, studying how
-                  psychological biases influence investor decisions and market behavior.
-                  Contributing to literature review, experimental design, and data
-                  analysis.
-                </p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <h3>Technical Intern — Rove (YC W24)</h3>
-                  <span class="timeline-date">Jul 2025 – Aug 2025 · Remote</span>
-                </div>
-                <p>
-                  Contributed to backend development and product execution for a consumer
-                  payments platform. Helped ship features, improve reliability, and
-                  support internal tooling at a fast-paced fintech startup.
-                </p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <h3>Ventures-TECH Summer Program — Harvard SEAS</h3>
-                  <span class="timeline-date">Jul 2025 – Aug 2025</span>
-                </div>
-                <p>
-                  Selected (15% acceptance rate) for a startup-focused program pairing
-                  students with early-stage tech companies. Worked closely with founders
-                  and executives on projects at the intersection of entrepreneurship and
-                  technology.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </template>
-
-      <template id="resume-content">
-        <section class="window-section">
-          <h2>Resume</h2>
-          <p class="section-intro">
-            Drop a PDF or external link to your full CV here.
-          </p>
-          <div class="resume-actions">
-            <a href="resume.pdf" class="btn btn-primary" target="_blank"
-              >Download Resume (PDF)</a
-            >
-            <p class="resume-note">
-              Update this button to point to your actual resume file or a
-              Notion / Google Drive link.
-            </p>
-          </div>
-          <div class="resume-preview-placeholder">
-            <p>Embedded resume preview</p>
-            <p>
-              If the PDF does not load below, use the download button to open it in a
-              new tab.
-            </p>
-            <iframe
-              src="resume.pdf"
-              title="Arihant Lodha — Resume"
-              loading="lazy"
-            ></iframe>
-          </div>
-        </section>
-      </template>
-
-      <template id="contact-content">
-        <section class="window-section">
-          <h2>Contact</h2>
-          <p class="section-intro">
-            Reach out about collaborations, projects, or just to say hi.
-          </p>
-          <div class="contact-layout">
-            <form class="contact-form" id="contact-form">
-              <div class="form-field">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" />
-              </div>
-              <div class="form-field">
-                <label for="email">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                />
-              </div>
-              <div class="form-field">
-                <label for="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  placeholder="What would you like to chat about?"
-                ></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-              <p class="form-note">
-                This form is currently a front-end demo. Wire it up to your
-                favorite email or backend service.
-              </p>
-            </form>
-            <div class="contact-details">
-              <h3>Social & Links</h3>
-              <ul class="social-links">
-                <li>
-                  <span>Email:</span>
-                  <a href="mailto:arihant97@smis.ac.jp">arihant97@smis.ac.jp</a>
-                </li>
-                <li>
-                  <span>LinkedIn:</span>
-                  <a href="https://www.linkedin.com/in/arihantlodha" target="_blank"
-                    >linkedin.com/in/arihantlodha</a
-                  >
-                </li>
-                <li>
-                  <span>GitHub:</span>
-                  <a href="https://github.com/arihantlodha-cmd" target="_blank"
-                    >github.com/arihantlodha-cmd</a
-                  >
-                </li>
-                <li>
-                  <span>Instagram:</span>
-                  <a href="https://www.instagram.com/arilo05" target="_blank"
-                    >@arilo05</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-      </template>
-
-      <template id="github-content">
-        <section class="window-section">
-          <h2>GitHub</h2>
-          <p class="section-intro">
-            Quant finance experiments, backtesting tools, and learning projects.
-          </p>
-          <div class="github-card">
-            <p>
-              I publish algorithmic trading systems, backtesting frameworks, and
-              data-driven experiments focused on Japanese equity markets and quantitative
-              finance. I also share smaller utilities and learning projects as I explore
-              new ideas.
-            </p>
-            <a
-              href="https://github.com/arihantlodha-cmd"
-              target="_blank"
-              class="btn btn-primary"
-            >
-              Visit GitHub Profile
-            </a>
-          </div>
-        </section>
-      </template>
-
-      <template id="media-content">
-        <section class="window-section">
-          <h2>Media</h2>
-          <p class="section-intro">
-            Talks, competitions, and appearances you’d like people to see.
-          </p>
-          <div class="grid grid-media">
-            <article class="card-media">
-              <div class="media-thumbnail">Robotics</div>
-              <h3>Japan V5RC HS National Regional Championship</h3>
-              <p>
-                3rd place finish among 18 teams across Japan at the VEX V5 Robotics
-                Competition hosted by Christian Academy in Japan. Highlighting robot
-                design, programming, and in-match strategy.
-              </p>
-              <span class="btn btn-ghost" aria-disabled="true">Media link coming soon</span>
-            </article>
-            <article class="card-media">
-              <div class="media-thumbnail">Wharton</div>
-              <h3>Wharton Global HS Investment Competition &amp; Data Science</h3>
-              <p>
-                Participant in the 2025 Wharton Global High School Investment Competition
-                and currently working on the Wharton Data Science Competition. Exploring
-                portfolio construction, risk management, and data-driven decision-making
-                in real-world style problems.
-              </p>
-            </article>
-          </div>
-        </section>
-      </template>
-
-      <template id="research-content">
-        <section class="window-section">
-          <h2>Research</h2>
-          <p class="section-intro">
-            Space for papers, publications, and research projects.
-          </p>
-          <div class="grid grid-research">
-            <article class="card-research">
-              <h3>Behavioral Finance Apprenticeship</h3>
-              <p class="research-venue">Universitas Mercu Buana — 2026</p>
-              <p>
-                Ongoing research fellowship exploring how investor psychology and
-                heuristics shape trading behavior and market outcomes. Currently
-                developing a paper that combines experimental design with market data.
-              </p>
-              <span class="btn btn-ghost" aria-disabled="true">In progress</span>
-            </article>
-            <article class="card-research">
-              <h3>Economic Writing on Inequality &amp; UBI</h3>
-              <p class="research-venue">
-                Recognized by Harvard Undergraduate Economics Association
-              </p>
-              <p>
-                Analytical writing on inequality and universal basic income, discussing
-                policy tradeoffs and distributional impacts. Recognition for clarity of
-                argument and synthesis of academic literature for broader audiences.
-              </p>
-              <a
-                href="ubi-inequality-essay.pdf"
-                target="_blank"
-                class="btn btn-ghost"
-                >Read essay (PDF)</a
-              >
-            </article>
-          </div>
-        </section>
-      </template>
-    </div>
-
-    <!-- React-powered Start menu (uses existing window system) -->
-    <div id="start-menu-root"></div>
-
-    <script src="script.js"></script>
-
-    <!-- React + ReactDOM UMD and Babel for light JSX usage -->
-    <script
-      crossorigin
-      src="https://unpkg.com/react@18/umd/react.production.min.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
-    ></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/babel">
-      const { useState, useEffect } = React;
-
-      const SECTIONS = [
-        { id: "about", label: "About Me" },
-        { id: "experience", label: "Experience" },
-        { id: "projects", label: "Projects" },
-        { id: "skills", label: "Skills" },
-        { id: "research", label: "Research" },
-        { id: "media", label: "Media" },
-        { id: "resume", label: "Resume" },
-        { id: "contact", label: "Contact" },
-        { id: "github", label: "GitHub" },
-      ];
-
-      function StartMenu() {
-        const [open, setOpen] = useState(false);
-
-        // Toggle from the existing Start button
-        useEffect(() => {
-          const btn = document.querySelector(".start-button");
-          if (!btn) return;
-          const handleClick = (e) => {
-            e.stopPropagation();
-            setOpen((prev) => !prev);
-          };
-          btn.addEventListener("click", handleClick);
-          return () => btn.removeEventListener("click", handleClick);
-        }, []);
-
-        // Close when clicking anywhere on the desktop
-        useEffect(() => {
-          if (!open) return;
-          const handleDocClick = () => setOpen(false);
-          document.addEventListener("click", handleDocClick);
-          return () => document.removeEventListener("click", handleDocClick);
-        }, [open]);
-
-        const handleOpenSection = (id) => {
-          if (typeof window.openWindow === "function") {
-            window.openWindow(id);
-          }
-          setOpen(false);
-        };
-
-        if (!open) return null;
-
-        return (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Project 1 -->
+        <article class="glass-card rounded-2xl p-1">
           <div
-            className="fixed bottom-14 left-3 z-[600]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="w-64 rounded-xl border border-slate-700/80 bg-slate-900/95 shadow-2xl shadow-slate-900/90 backdrop-blur-md">
-              <div className="px-3 pt-2 pb-2 border-b border-slate-700/70 flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-[10px] font-mono">
-                  AL
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-semibold text-slate-100">
-                    AriOS Menu
-                  </span>
-                  <span className="text-[10px] text-slate-400">
-                    Quick launch
-                  </span>
-                </div>
-              </div>
-              <div className="py-2 max-h-72 overflow-y-auto">
-                {SECTIONS.map((s) => (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => handleOpenSection(s.id)}
-                    className="w-full px-3 py-1.5 text-left text-xs text-slate-100 hover:bg-slate-800/90 hover:text-sky-300 flex items-center gap-2 transition-colors"
-                  >
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400/80" />
-                    <span>{s.label}</span>
-                  </button>
-                ))}
-              </div>
+            class="bg-gray-900/50 rounded-xl h-48 mb-4 border border-white/5 flex items-center justify-center relative overflow-hidden group">
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity">
             </div>
+            <span class="text-4xl transform group-hover:scale-110 transition-transform duration-300">📈</span>
           </div>
-        );
-      }
+          <div class="px-5 pb-6">
+            <div class="flex gap-2 mb-3">
+              <span
+                class="text-[10px] uppercase tracking-wider font-semibold text-blue-400 bg-blue-500/10 px-2 py-1 rounded">Machine
+                Learning</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Stock Price Prediction</h3>
+            <p class="text-sm text-gray-400 mb-4 line-clamp-3">
+              Achieved 95% R² accuracy predicting next-day prices for Toyota (TSE: 7203). Found that simple linear
+              models using 5-day momentum outperformed complex Random Forest models (which severeley overfitted).
+            </p>
+            <a href="https://github.com/arihantlodha-cmd/ML-Stock-Price-Prediction" target="_blank"
+              class="text-white text-sm font-medium hover:underline">View Source</a>
+          </div>
+        </article>
 
-      const startRoot = document.getElementById("start-menu-root");
-      if (startRoot) {
-        const root = ReactDOM.createRoot(startRoot);
-        root.render(<StartMenu />);
-      }
-    </script>
-  </body>
+        <!-- Project 2 -->
+        <article class="glass-card rounded-2xl p-1">
+          <div
+            class="bg-gray-900/50 rounded-xl h-48 mb-4 border border-white/5 flex items-center justify-center relative overflow-hidden group">
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-emerald-600/20 to-teal-600/20 opacity-0 group-hover:opacity-100 transition-opacity">
+            </div>
+            <span class="text-4xl transform group-hover:scale-110 transition-transform duration-300">💴</span>
+          </div>
+          <div class="px-5 pb-6">
+            <div class="flex gap-2 mb-3">
+              <span
+                class="text-[10px] uppercase tracking-wider font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">Quant
+                Finance</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Nikkei Strategy Backtester</h3>
+            <p class="text-sm text-gray-400 mb-4 line-clamp-3">
+              Python-based engine evaluating moving average crossover strategies (50/200 SMA) on TSE securities like
+              Sony and SoftBank. Includes pipelines for yfinance data and slippage simulation.
+            </p>
+            <a href="https://github.com/arihantlodha-cmd/Japanese-Stock-Moving-Average-Strategy" target="_blank"
+              class="text-white text-sm font-medium hover:underline">View Source</a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="glass-card rounded-2xl p-1">
+          <div
+            class="bg-gray-900/50 rounded-xl h-48 mb-4 border border-white/5 flex items-center justify-center relative overflow-hidden group">
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-orange-600/20 to-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity">
+            </div>
+            <span class="text-4xl transform group-hover:scale-110 transition-transform duration-300">🤖</span>
+          </div>
+          <div class="px-5 pb-6">
+            <div class="flex gap-2 mb-3">
+              <span
+                class="text-[10px] uppercase tracking-wider font-semibold text-orange-400 bg-orange-500/10 px-2 py-1 rounded">Robotics</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">VEX Robotics Nationals</h3>
+            <p class="text-sm text-gray-400 mb-4 line-clamp-3">
+              Ranked 3rd Nationally (Japan V5RC). Point Person for SMIS Robotics Team. Designed autonomous routines
+              using PID control loops and computer vision.
+            </p>
+            <span class="text-gray-500 text-sm font-medium">Details Soon</span>
+          </div>
+        </article>
+
+        <!-- Project 4: Wharton Data Science -->
+        <article class="glass-card rounded-2xl p-1">
+          <div
+            class="bg-gray-900/50 rounded-xl h-48 mb-4 border border-white/5 flex items-center justify-center relative overflow-hidden group">
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-indigo-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity">
+            </div>
+            <span class="text-4xl transform group-hover:scale-110 transition-transform duration-300">📊</span>
+          </div>
+          <div class="px-5 pb-6">
+            <div class="flex gap-2 mb-3">
+              <span
+                class="text-[10px] uppercase tracking-wider font-semibold text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded">Data
+                Science</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Wharton Data Science Comp</h3>
+            <p class="text-sm text-gray-400 mb-4 line-clamp-3">
+              Current participant. Developing data-driven solutions for real-world financial problems found in the
+              Wharton Global High School Data Science Competition.
+            </p>
+            <span class="text-gray-500 text-sm font-medium">In Progress</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- WRITING / MEDIA -->
+    <section id="writing" class="mb-32 scroll-mt-24">
+      <h2 class="text-3xl font-bold mb-8">Writing & Insights</h2>
+      <div class="glass-card rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-1">
+          <div class="text-xs font-bold text-purple-400 mb-2">FEATURED</div>
+          <h3 class="text-2xl font-bold mb-4">Medium</h3>
+          <p class="text-gray-400 mb-6">
+            I write about my experiences in Tokyo, algorithmic trading experiments, and general thoughts on technology
+            and finance.
+          </p>
+          <a href="https://medium.com/@arilooo" target="_blank"
+            class="px-5 py-2 bg-white text-black text-sm font-semibold rounded hover:bg-gray-200 transition-colors">Read
+            on Medium</a>
+        </div>
+        <div class="flex-1 w-full space-y-4">
+          <a href="https://medium.com/@arilooo" target="_blank"
+            class="block p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 group">
+            <h4 class="font-bold text-gray-200 group-hover:text-white">Market Microstructure</h4>
+            <p class="text-sm text-gray-500 mt-1">Observations on order books and trade latency.</p>
+          </a>
+          <div class="block p-4">
+            <span class="text-sm text-gray-600 italic">More articles coming soon...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="max-w-2xl mx-auto text-center pb-20 scroll-mt-24">
+      <h2 class="text-4xl font-bold mb-6">Let's Connect</h2>
+      <p class="text-gray-400 mb-8">
+        Interested in quantitative finance, machine learning, and behavioral economics. Open to research collaborations
+        and coffee chats in Tokyo.
+      </p>
+      <div class="flex justify-center gap-6 mb-12">
+        <a href="mailto:arihant97@smis.ac.jp"
+          class="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white hover:text-black transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+        </a>
+        <a href="https://github.com/arihantlodha-cmd" target="_blank"
+          class="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white hover:text-black transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+            <path d="M9 18c-4.51 2-5-2-7-2" />
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/arihant-lodha-24a4593a0" target="_blank"
+          class="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white hover:text-black transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect width="4" height="12" x="2" y="9" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/arilo05" target="_blank"
+          class="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white hover:text-black transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+        </a>
+      </div>
+      <p class="text-xs text-gray-600">
+        © 2026 Arihant Lodha. Built with Aceternity & Tailwind.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
-

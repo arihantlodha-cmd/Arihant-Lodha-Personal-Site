@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Arihant Lodha - First-generation student researching quantitative finance and machine learning in Tokyo" />
+  <meta name="keywords"
+    content="quantitative finance, machine learning, algorithmic trading, student researcher, Tokyo" />
+  <meta property="og:title" content="Arihant Lodha — Quant Finance & ML" />
+  <meta property="og:description"
+    content="First-generation student researching quantitative finance and machine learning in Tokyo." />
+  <meta property="og:type" content="website" />
+  <title>Arihant Lodha — AriOS v1.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <!-- Tailwind CDN for utility classes on select components -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+            mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+          },
+          colors: {
+            slatebg: "#020617",
+          },
+        },
+      },
+      corePlugins: {
+        preflight: true,
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Boot Screen -->
+  <div id="boot-screen">
+    <div class="boot-terminal">
+      <div class="boot-logo">AL</div>
+      <div class="boot-title">AriOS v1.0</div>
+      <div class="boot-line">Loading system<span class="boot-dots">...</span></div>
+      <div class="boot-sub">Personal workspace environment initializing</div>
+    </div>
+  </div>
+
+  <!-- Desktop Environment -->
+  <div id="desktop" class="desktop hidden">
+    <!-- Background effects -->
+    <div class="desktop-grid"></div>
+    <div class="desktop-stars"></div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+      <button class="start-button">
+        <span class="start-logo">AL</span>
+        <span class="start-text">Start</span>
+      </button>
+      <div class="taskbar-windows" id="taskbar-windows"></div>
+      <div class="taskbar-system">
+        <span class="taskbar-icon">🔊</span>
+        <span class="taskbar-icon">📶</span>
+        <span class="taskbar-clock" id="taskbar-clock">00:00</span>
+      </div>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <button class="desktop-icon" data-window="about">
+        <div class="desktop-icon-image desktop-icon-about">
+          <span class="desktop-icon-symbol">ME</span>
+        </div>
+        <span class="desktop-icon-label">About Me</span>
+      </button>
+      <button class="desktop-icon" data-window="projects">
+        <div class="desktop-icon-image desktop-icon-projects">
+          <span class="desktop-icon-symbol">PRJ</span>
+        </div>
+        <span class="desktop-icon-label">Projects</span>
+      </button>
+      <button class="desktop-icon" data-window="writing">
+        <div class="desktop-icon-image desktop-icon-writing">
+          <span class="desktop-icon-symbol">WRT</span>
+        </div>
+        <span class="desktop-icon-label">Writing</span>
+      </button>
+      <button class="desktop-icon" data-window="skills">
+        <div class="desktop-icon-image desktop-icon-skills">
+          <span class="desktop-icon-symbol">&lt;/&gt;</span>
+        </div>
+        <span class="desktop-icon-label">Skills</span>
+      </button>
+      <button class="desktop-icon" data-window="experience">
+        <div class="desktop-icon-image desktop-icon-experience">
+          <span class="desktop-icon-symbol">XP</span>
+        </div>
+        <span class="desktop-icon-label">Experience</span>
+      </button>
+      <button class="desktop-icon" data-window="research">
+        <div class="desktop-icon-image desktop-icon-research">
+          <span class="desktop-icon-symbol">RCH</span>
+        </div>
+        <span class="desktop-icon-label">Research</span>
+      </button>
+      <button class="desktop-icon" data-window="media">
+        <div class="desktop-icon-image desktop-icon-media">
+          <span class="desktop-icon-symbol">►</span>
+        </div>
+        <span class="desktop-icon-label">Media</span>
+      </button>
+      <button class="desktop-icon" data-window="resume">
+        <div class="desktop-icon-image desktop-icon-resume">
+          <span class="desktop-icon-symbol">CV</span>
+        </div>
+        <span class="desktop-icon-label">Resume</span>
+      </button>
+      <button class="desktop-icon" data-window="contact">
+        <div class="desktop-icon-image desktop-icon-contact">
+          <span class="desktop-icon-symbol">@</span>
+        </div>
+        <span class="desktop-icon-label">Contact</span>
+      </button>
+      <button class="desktop-icon" data-window="github">
+        <div class="desktop-icon-image desktop-icon-github">
+          <span class="desktop-icon-symbol">GH</span>
+        </div>
+        <span class="desktop-icon-label">GitHub</span>
+      </button>
+    </div>
+
+    <!-- Window Templates -->
+    <template id="window-template">
+      <div class="window">
+        <div class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon"></span>
+            <span class="window-title-text"></span>
+          </div>
+          <div class="window-controls">
+            <button class="window-btn window-minimize" aria-label="Minimize"></button>
+            <button class="window-btn window-maximize" aria-label="Maximize"></button>
+            <button class="window-btn window-close" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-content"></div>
+        <div class="window-resize-handle"></div>
+      </div>
+    </template>
+
+    <!-- Content templates -->
+    <template id="about-content">
+      <section class="window-section about-section">
+        <div class="about-main">
+          <div class="about-avatar">
+            <div class="avatar-circle">AL</div>
+          </div>
+          <div class="about-text">
+            <div class="about-header">
+              <h2>Arihant Lodha</h2>
+              <span class="verified-badge" aria-label="Verified profile" title="Verified profile">Based in Tokyo</span>
+            </div>
+            <p class="about-pronouns">Quant Finance & ML</p>
+            <p>
+              I'm a first-generation student from a village in India, currently navigating the vibrant tech landscape of
+              Tokyo. My journey has been defined by a curiosity to bridge the gap between cultures and technologies.
+            </p>
+            <p>
+              I build machine learning models, design algorithmic trading systems, and compete in robotics. When I'm not
+              coding, you can find me boxing or exploring the city.
+            </p>
+            <p>
+              My work bridges India, Tokyo, and global financial markets, leveraging data to find patterns in
+              complexity.
+            </p>
+            <p>
+              Currently, I am a sophomore building toward a career in quantitative finance, combining my passion for
+              mathematics and markets.
+            </p>
+
+            <div class="tokyo-angle-box"
+              style="margin-top: 1.5rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; border-radius: 4px;">
+              <h3 style="font-size: 14px; margin-bottom: 0.5rem; color: #fff;">The Tokyo Angle</h3>
+              <p style="font-size: 13px;">
+                Living in Tokyo offers a unique vantage point on technology and finance. The blend of tradition and
+                hyper-modernity influences my approach to problem-solving—respecting fundamentals while pushing
+                boundaries.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="about-meta" style="margin-top: 2rem; display: block;">
+          <h3>Highlights</h3>
+          <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+            <div class="card" style="text-align: center;">
+              <h4 style="font-size: 24px; color: #3b82f6; margin-bottom: 4px;">95%</h4>
+              <p style="font-size: 11px; color: #94a3b8;">ML Model Accuracy (JP Equities)</p>
+            </div>
+            <div class="card" style="text-align: center;">
+              <h4 style="font-size: 24px; color: #3b82f6; margin-bottom: 4px;">3rd</h4>
+              <p style="font-size: 11px; color: #94a3b8;">Japan VEX Robotics Nationals</p>
+            </div>
+            <div class="card" style="text-align: center;">
+              <h4 style="font-size: 24px; color: #3b82f6; margin-bottom: 4px;">200+</h4>
+              <p style="font-size: 11px; color: #94a3b8;">GitHub Users</p>
+            </div>
+            <div class="card" style="text-align: center;">
+              <h4 style="font-size: 24px; color: #3b82f6; margin-bottom: 4px;">30+</h4>
+              <p style="font-size: 11px; color: #94a3b8;">Students Tutored</p>
+            </div>
+            <div class="card" style="text-align: center;">
+              <h4 style="font-size: 24px; color: #3b82f6; margin-bottom: 4px;">1st Gen</h4>
+              <p style="font-size: 11px; color: #94a3b8;">Student</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template id="writing-content">
+      <section class="window-section">
+        <h2>Writing</h2>
+        <p class="section-intro">Thoughts on finance, technology, and life in Tokyo.</p>
+
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3>The Tokyo Ledger</h3>
+            <span class="card-tag">Substack</span>
+          </div>
+          <p>
+            My personal newsletter where I dissect market trends, share code for trading strategies, and write about my
+            experiences in Tokyo.
+          </p>
+          <div class="card-actions">
+            <a href="#" class="btn btn-primary" target="_blank">Subscribe</a>
+          </div>
+        </div>
+
+        <h3>Recent Posts</h3>
+        <div class="grid grid-projects">
+          <article class="card-project">
+            <div class="card-header">
+              <h3>Understanding Market Microstructure</h3>
+              <span class="card-tag">Finance</span>
+            </div>
+            <p>A deep dive into how order books work and why latency matters in modern trading.</p>
+            <div class="card-actions">
+              <span class="btn btn-ghost">Coming Soon</span>
+            </div>
+          </article>
+
+          <article class="card-project">
+            <div class="card-header">
+              <h3>Building a Trading Bot in Python</h3>
+              <span class="card-tag">Tutorial</span>
+            </div>
+            <p>Step-by-step guide to connecting to the yfinance API and executing paper trades.</p>
+            <div class="card-actions">
+              <span class="btn btn-ghost">Coming Soon</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </template>
+
+    <template id="projects-content">
+      <section class="window-section">
+        <h2>Projects</h2>
+        <p class="section-intro">A few things you’ve been building recently.</p>
+        <div class="grid grid-projects">
+          <article class="card-project">
+            <div class="card-header">
+              <h3>ML Stock Price Prediction</h3>
+              <span class="card-tag">Machine Learning · Finance</span>
+            </div>
+            <p>
+              A predictive model for Japanese equities achieving 95% directional accuracy. Leverages a Random Forest
+              classifier trained on 10 years of historical data, incorporating technical indicators like RSI and MACD.
+            </p>
+            <div class="card-actions">
+              <a href="https://github.com/arihantlodha-cmd/ML-Stock-Price-Prediction" target="_blank"
+                class="btn btn-primary">View on GitHub</a>
+            </div>
+          </article>
+
+          <article class="card-project">
+            <div class="card-header">
+              <h3>Nikkei Strategy Backtester</h3>
+              <span class="card-tag">Quantitative Finance</span>
+            </div>
+            <p>
+              A robust backtesting engine for the Nikkei 225. Simulates trading strategies with configurable parameters
+              (stop-loss, take-profit), accounting for transaction costs and slippage to estimate real-world
+              performance.
+            </p>
+            <div class="card-actions">
+              <a href="https://github.com/arihantlodha-cmd/Japanese-Stock-Moving-Average-Strategy" target="_blank"
+                class="btn btn-primary">View on GitHub</a>
+            </div>
+          </article>
+
+          <article class="card-project">
+            <div class="card-header">
+              <h3>Robotics — Japan V5RC Nationals</h3>
+              <span class="card-tag">Robotics · Engineering</span>
+            </div>
+            <p>
+              Ranked 3rd Nationally. Designed and programmed an autonomous robot for the VEX Robotics Competition.
+              Implemented PID control loops for precise movement and computer vision for object detection.
+            </p>
+            <div class="card-actions">
+              <span class="btn btn-ghost" aria-disabled="true">Details coming soon</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </template>
+
+    <template id="skills-content">
+      <section class="window-section">
+        <h2>Skills</h2>
+        <p class="section-intro">
+          Organize your skills by category. Everything here is placeholder.
+        </p>
+        <div class="grid grid-skills">
+          <div class="card">
+            <h3>Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">SQL</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Libraries &amp; Frameworks</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">pandas</span>
+              <span class="skill-tag">NumPy</span>
+              <span class="skill-tag">scikit-learn</span>
+              <span class="skill-tag">Matplotlib</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Tools & Platforms</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git &amp; GitHub</span>
+              <span class="skill-tag">Jupyter Notebook</span>
+              <span class="skill-tag">yfinance</span>
+              <span class="skill-tag">Excel / Google Sheets</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Other</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Quantitative Finance</span>
+              <span class="skill-tag">Algorithmic Trading</span>
+              <span class="skill-tag">Behavioral Economics</span>
+              <span class="skill-tag">Research Writing</span>
+              <span class="skill-tag">Robotics &amp; Control</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template id="experience-content">
+      <section class="window-section">
+        <h2>Experience</h2>
+        <p class="section-intro">
+          A timeline of roles, internships, and research positions.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Research Fellow — Universitas Mercu Buana</h3>
+                <span class="timeline-date">Feb 2026 – Present · Remote</span>
+              </div>
+              <p>
+                Working on a behavioral finance research paper, studying how
+                psychological biases influence investor decisions and market behavior.
+                Contributing to literature review, experimental design, and data
+                analysis.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Technical Intern — Rove (YC W24)</h3>
+                <span class="timeline-date">Jul 2025 – Aug 2025 · Remote</span>
+              </div>
+              <p>
+                Contributed to backend development and product execution for a consumer
+                payments platform. Helped ship features, improve reliability, and
+                support internal tooling at a fast-paced fintech startup.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Ventures-TECH Summer Program — Harvard SEAS</h3>
+                <span class="timeline-date">Jul 2025 – Aug 2025</span>
+              </div>
+              <p>
+                Selected (15% acceptance rate) for a startup-focused program pairing
+                students with early-stage tech companies. Worked closely with founders
+                and executives on projects at the intersection of entrepreneurship and
+                technology.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template id="resume-content">
+      <section class="window-section">
+        <h2>Resume</h2>
+        <p class="section-intro">
+          Drop a PDF or external link to your full CV here.
+        </p>
+        <div class="resume-actions">
+          <a href="resume.pdf" class="btn btn-primary" target="_blank">Download Resume (PDF)</a>
+          <p class="resume-note">
+            Update this button to point to your actual resume file or a
+            Notion / Google Drive link.
+          </p>
+        </div>
+        <div class="resume-preview-placeholder">
+          <p>Embedded resume preview</p>
+          <p>
+            If the PDF does not load below, use the download button to open it in a
+            new tab.
+          </p>
+          <iframe src="resume.pdf" title="Arihant Lodha — Resume" loading="lazy"></iframe>
+        </div>
+      </section>
+    </template>
+
+    <template id="contact-content">
+      <section class="window-section">
+        <h2>Contact</h2>
+        <p class="section-intro">
+          Reach out about collaborations, projects, or just to say hi.
+        </p>
+        <div class="contact-layout">
+          <form class="contact-form" id="contact-form">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" />
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div class="form-field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4"
+                placeholder="What would you like to chat about?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <p class="form-note">
+              This form is currently a front-end demo. Wire it up to your
+              favorite email or backend service.
+            </p>
+          </form>
+          <div class="contact-details">
+            <h3>Social & Links</h3>
+            <ul class="social-links">
+              <li>
+                <span>Email:</span>
+                <a href="mailto:arihant97@smis.ac.jp">arihant97@smis.ac.jp</a>
+              </li>
+              <li>
+                <span>LinkedIn:</span>
+                <a href="https://www.linkedin.com/in/arihantlodha" target="_blank">linkedin.com/in/arihantlodha</a>
+              </li>
+              <li>
+                <span>GitHub:</span>
+                <a href="https://github.com/arihantlodha-cmd" target="_blank">github.com/arihantlodha-cmd</a>
+              </li>
+              <li>
+                <span>Instagram:</span>
+                <a href="https://www.instagram.com/arilo05" target="_blank">@arilo05</a>
+              </li>
+              <li>
+                <p style="margin-top: 1rem; font-size: 0.8rem; color: #94a3b8; line-height: 1.4;">
+                  Interested in quantitative finance, machine learning, and behavioral economics. Open to research
+                  collaborations and coffee chats in Tokyo.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template id="github-content">
+      <section class="window-section">
+        <h2>GitHub</h2>
+        <p class="section-intro">
+          Quant finance experiments, backtesting tools, and learning projects.
+        </p>
+        <div class="github-card">
+          <p>
+            I publish algorithmic trading systems, backtesting frameworks, and
+            data-driven experiments focused on Japanese equity markets and quantitative
+            finance. I also share smaller utilities and learning projects as I explore
+            new ideas.
+          </p>
+          <a href="https://github.com/arihantlodha-cmd" target="_blank" class="btn btn-primary">
+            Visit GitHub Profile
+          </a>
+        </div>
+      </section>
+    </template>
+
+    <template id="media-content">
+      <section class="window-section">
+        <h2>Media</h2>
+        <p class="section-intro">
+          Talks, competitions, and appearances you’d like people to see.
+        </p>
+        <div class="grid grid-media">
+          <article class="card-media">
+            <div class="media-thumbnail">Robotics</div>
+            <h3>Japan V5RC HS National Regional Championship</h3>
+            <p>
+              3rd place finish among 18 teams across Japan at the VEX V5 Robotics
+              Competition hosted by Christian Academy in Japan. Highlighting robot
+              design, programming, and in-match strategy.
+            </p>
+            <span class="btn btn-ghost" aria-disabled="true">Media link coming soon</span>
+          </article>
+          <article class="card-media">
+            <div class="media-thumbnail">Wharton</div>
+            <h3>Wharton Global HS Investment Competition &amp; Data Science</h3>
+            <p>
+              Participant in the 2025 Wharton Global High School Investment Competition
+              and currently working on the Wharton Data Science Competition. Exploring
+              portfolio construction, risk management, and data-driven decision-making
+              in real-world style problems.
+            </p>
+          </article>
+        </div>
+      </section>
+    </template>
+
+    <template id="research-content">
+      <section class="window-section">
+        <h2>Research</h2>
+        <p class="section-intro">
+          Space for papers, publications, and research projects.
+        </p>
+        <div class="grid grid-research">
+          <article class="card-research">
+            <h3>Behavioral Finance Apprenticeship</h3>
+            <p class="research-venue">Universitas Mercu Buana — 2026</p>
+            <p>
+              Ongoing research fellowship exploring how investor psychology and
+              heuristics shape trading behavior and market outcomes. Currently
+              developing a paper that combines experimental design with market data.
+            </p>
+            <span class="btn btn-ghost" aria-disabled="true">In progress</span>
+          </article>
+          <article class="card-research">
+            <h3>Economic Writing on Inequality &amp; UBI</h3>
+            <p class="research-venue">
+              Recognized by Harvard Undergraduate Economics Association
+            </p>
+            <p>
+              Analytical writing on inequality and universal basic income, discussing
+              policy tradeoffs and distributional impacts. Recognition for clarity of
+              argument and synthesis of academic literature for broader audiences.
+            </p>
+            <a href="ubi-inequality-essay.pdf" target="_blank" class="btn btn-ghost">Read essay (PDF)</a>
+          </article>
+        </div>
+      </section>
+    </template>
+  </div>
+
+  <!-- React-powered Start menu (uses existing window system) -->
+  <div id="start-menu-root"></div>
+
+  <script src="script.js"></script>
+
+  <!-- React + ReactDOM UMD and Babel for light JSX usage -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const SECTIONS = [
+      { id: "about", label: "About Me" },
+      { id: "experience", label: "Experience" },
+      { id: "projects", label: "Projects" },
+      { id: "skills", label: "Skills" },
+      { id: "research", label: "Research" },
+      { id: "media", label: "Media" },
+      { id: "resume", label: "Resume" },
+      { id: "contact", label: "Contact" },
+      { id: "github", label: "GitHub" },
+    ];
+
+    function StartMenu() {
+      const [open, setOpen] = useState(false);
+
+      // Toggle from the existing Start button
+      useEffect(() => {
+        const btn = document.querySelector(".start-button");
+        if (!btn) return;
+        const handleClick = (e) => {
+          e.stopPropagation();
+          setOpen((prev) => !prev);
+        };
+        btn.addEventListener("click", handleClick);
+        return () => btn.removeEventListener("click", handleClick);
+      }, []);
+
+      // Close when clicking anywhere on the desktop
+      useEffect(() => {
+        if (!open) return;
+        const handleDocClick = () => setOpen(false);
+        document.addEventListener("click", handleDocClick);
+        return () => document.removeEventListener("click", handleDocClick);
+      }, [open]);
+
+      const handleOpenSection = (id) => {
+        if (typeof window.openWindow === "function") {
+          window.openWindow(id);
+        }
+        setOpen(false);
+      };
+
+      if (!open) return null;
+
+      return (
+        <div
+          className="fixed bottom-14 left-3 z-[600]"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="w-64 rounded-xl border border-slate-700/80 bg-slate-900/95 shadow-2xl shadow-slate-900/90 backdrop-blur-md">
+            <div className="px-3 pt-2 pb-2 border-b border-slate-700/70 flex items-center gap-2">
+              <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-[10px] font-mono">
+                AL
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xs font-semibold text-slate-100">
+                  AriOS Menu
+                </span>
+                <span className="text-[10px] text-slate-400">
+                  Quick launch
+                </span>
+              </div>
+            </div>
+            <div className="py-2 max-h-72 overflow-y-auto">
+              {SECTIONS.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => handleOpenSection(s.id)}
+                  className="w-full px-3 py-1.5 text-left text-xs text-slate-100 hover:bg-slate-800/90 hover:text-sky-300 flex items-center gap-2 transition-colors"
+                >
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-sky-400/80" />
+                  <span>{s.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const startRoot = document.getElementById("start-menu-root");
+    if (startRoot) {
+      const root = ReactDOM.createRoot(startRoot);
+      root.render(<StartMenu />);
+    }
+  </script>
+</body>
+
+</html>
